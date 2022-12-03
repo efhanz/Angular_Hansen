@@ -1,0 +1,47 @@
+
+<h1 class="my-4 d-flex justify-content-center">Snacks-list</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Image</th>
+        <th scope="col">Product</th>
+        <th scope="col">Origin</th>
+        <th scope="col">OldPrice</th>
+        <th scope="col">Price</th>
+        <th scope="col">Stock</th>
+
+
+        <th scope="col">Quantity</th>
+        <th scope="col">To Buy</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+
+
+        <tr *ngFor="let snack of snacks" [ngClass]="{'clearance': snack.clearance}">
+          <td><img width="60" class="img-thumbnail" [src]="snack.image" [alt]="snack.product"></td>
+          <td>{{snack.product}}</td>
+          <td>{{snack.origin}}</td>
+
+          <td *ngIf="snack.clearance==false"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+          <td *ngIf="snack.clearance==true"><span class="glyphicon glyphicon-remove " aria-hidden="true"></span><span class="text-decoration-line-through">{{snack.oldprice | currency}}</span></td>
+
+          <td>{{snack.price | currency}}</td>
+          <td *ngIf="snack.stock>0"><span class="glyphicon glyphicon-ok" aria-hidden="true">{{snack.stock}}</span></td>
+          <td *ngIf="snack.stock==0"><span class="glyphicon glyphicon-remove badge text-bg-danger" aria-hidden="true">Without stock</span></td>
+
+          <td>
+           <app-input-numeric [(quantity)]="snack.quantity" [max]="snack.stock" *ngIf="snack.stock" (maxReached)="maxReached($event)"></app-input-numeric>
+          </td>
+          <td *ngIf="snack.stock>0">
+            <button class="btn btn-light btn-sm">Qty: {{snack.quantity}}</button>
+            <button class="btn btn-outline-dark btn-sm" (click)="addToCart(snack)">Add to Cart</button>
+          </td>
+
+
+        </tr>
+
+    </tbody>
+  </table>
