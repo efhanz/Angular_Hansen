@@ -37,7 +37,7 @@ snacks : Snack[] = [
   "oldprice" : 2500,
   "price" : 2500,
   "stock" : 0,
-  "image" : "./assets/img/avellanas.jpg",
+  "image" : "./assets/img/nueces.jpg",
   "clearance" : false,
   "quantity" : 0,
 },
